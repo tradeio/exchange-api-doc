@@ -90,8 +90,8 @@ USER_DATA | Endpoint requires sending a valid API-Key and signature.
 * `totalParams` is a concatenation of `query string` with the `request body`.
 <br>See: <b><a href="https://gitlab.com/trade-io/official-api-docs/blob/master/sign_request.md">SIGN</a></b>
 
-
-
+# Permissions
+For each method in the Account Endpoints, you need permission. Permissions for keys are set when they are created. Permissions can be of two types: "Read access" and "Trading".
 
 # Public API Endpoints
 ## Terminology
@@ -445,6 +445,8 @@ Send in a new order.
 
 **Weight:**
 1
+**Permission:**
+Trading
 
 **Parameters:**
 
