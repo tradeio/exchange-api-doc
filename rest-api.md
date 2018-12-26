@@ -445,6 +445,7 @@ Send in a new order.
 
 **Weight:**
 1
+
 **Permission:**
 Trading
 
