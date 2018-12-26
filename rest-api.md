@@ -500,6 +500,9 @@ Cancel an active order.
 **Weight:**
 1
 
+**Permission:**
+Trading
+
 **Parameters:**
 
 Name | Type | Mandatory | Description
@@ -524,6 +527,9 @@ Get all open orders on a symbol.
 
 **Weight:**
 1 
+
+**Permission:**
+Read access
 
 **Parameters:**
 
@@ -570,6 +576,9 @@ Get all closed orders on a symbol.
 
 **Weight:**
 5
+
+**Permission:**
+Read access
 
 **Parameters:**
 
@@ -620,6 +629,9 @@ Get current account information.
 
 **Weight:**
 5
+
+**Permission:**
+Read access
 
 **Parameters:**
 NONE
