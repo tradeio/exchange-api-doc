@@ -592,29 +592,58 @@ limit | int | NO | Default 100, max 250
 **Response:**
 ```javascript
 {
-  "code": 0,
-  "timestamp": 1544494844556,
-  "orders": [
+  "filters": {
+    "market": "btc_usdt",
+    "start_date": "2018-12-24T10:29:09",
+    "end_date": "2018-12-26T10:29:09"
+  },
+  "paging": {
+    "page": 2,
+    "per_page": 2,
+    "total": 20
+  },
+  "data": [
     {
-      "orderId": "-72057594037927935",
-      "total": "0.0",
+      "orderId": "-72057594037749992",
+      "total": "0.1100",
       "orderType": "limit",
-      "commission": "0.0",
-      "createdAt": "2018-11-29T07:04:44.6521146Z",
-      "unitsFilled": "0.0",
+      "commission": "0.00011000",
+      "createdAt": "2018-12-26T09:44:38.4481031Z",
+      "unitsFilled": "0.0100",
       "isPending": false,
       "status": "Completed",
-      "type": "buy",
+      "type": "sell",
       "requestedAmount": "0.0100",
-      "baseAmount": "0.0",
-      "quoteAmount": "0.0",
-      "price": "0.0100",
+      "baseAmount": "0.0100",
+      "quoteAmount": "0.1100",
+      "price": "11.0",
       "isLimit": true,
       "loanRate": "0.0",
       "rateStop": "0.0",
       "instrument": "btc_usdt",
-      "requestedPrice": "0.0100",
-      "remainingAmount": "0.0100"
+      "requestedPrice": "11.0",
+      "remainingAmount": "0.0"
+    },
+    {
+      "orderId": "-72057594037749994",
+      "total": "0.1200",
+      "orderType": "limit",
+      "commission": "0.00012000",
+      "createdAt": "2018-12-26T09:44:36.5461192Z",
+      "unitsFilled": "0.0100",
+      "isPending": false,
+      "status": "Completed",
+      "type": "sell",
+      "requestedAmount": "0.0100",
+      "baseAmount": "0.0100",
+      "quoteAmount": "0.1200",
+      "price": "12.0",
+      "isLimit": true,
+      "loanRate": "0.0",
+      "rateStop": "0.0",
+      "instrument": "btc_usdt",
+      "requestedPrice": "12.0",
+      "remainingAmount": "0.0"
     }
   ]
 }
