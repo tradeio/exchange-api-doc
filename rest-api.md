@@ -60,6 +60,16 @@ Below is the table with endpoint weights
 |```GET /api/v1/closedOrders```|`Weight` or `Order`|5|
 |```GET /api/v1/account```|`Weight` or `Order`|1|
  
+ ## Total limits
+ |**Limit Type**|**Time period**|**Limit**|
+|---|---|---|
+|Weight|Minute|1200|
+|Weight|Hour|60000|
+|Weight|Day|1400000|
+|Weight|Minute|600|
+|Weight|Hour|3600|
+|Weight|Day|86000|
+
 # Endpoint Security Type
 * Each endpoint has a security type that determines how should be interacted with it.
 * API-keys are passed into the REST API via the `X-MBX-APIKEY`
