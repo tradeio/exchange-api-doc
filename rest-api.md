@@ -60,15 +60,15 @@ Below is the table with endpoint weights
 |```GET /api/v1/closedOrders```|`Weight` or `Order`|5|
 |```GET /api/v1/account```|`Weight` or `Order`|1|
  
- ## Total limits
+ ### Total limits
  |**Limit Type**|**Time period**|**Limit**|
 |---|---|---|
 |Weight|Minute|1200|
 |Weight|Hour|60000|
 |Weight|Day|1400000|
-|Weight|Minute|600|
-|Weight|Hour|3600|
-|Weight|Day|86000|
+|Order|Minute|600|
+|Order|Hour|3600|
+|Order|Day|86000|
 
 # Endpoint Security Type
 * Each endpoint has a security type that determines how should be interacted with it.
