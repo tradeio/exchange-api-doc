@@ -1,8 +1,7 @@
 # Public Rest API for Trade.io (2018-12-26)
 # General API Information
-* The base endpoint is: **https://api.exchange.trade.io**, 
-* There is a Swagger on the base endpoint. You can open it in a browser, view available endpoints, execute some API calls,
- and so on.
+* The base endpoint is: **https://api.exchange.trade.io**
+* There is a Swagger on the base endpoint. You can open it in a browser, view available endpoints, execute some API calls, etc.
 * All endpoints return either a JSON object or an array.
 * Data is returned in **ascending** order. i.e. oldest first, newest last.
 * All time and timestamp related fields are in milliseconds.
@@ -15,14 +14,14 @@
 * Any endpoint can return an ERROR; the error payload is as follows:
 ```javascript
 {
-    "error":"Invalid value symbol: 'btc_us'"
+    "error":"Invalid value, symbol: 'btc_us'"
 }
 ```
-* When and endpoint's response is success, the code is 0 and no message present. 
+* When and endpoint's response is a success, the code is 0 and no message is present. 
 * Specific error codes and messages are defined in another document.
 * For `GET` endpoints, parameters must be sent as a `query string`.
 * For `POST`, `PUT`, and `DELETE` endpoints, the parameters may be sent as a
-  `query string` or in the `request body` with content type
+  `query string` or in the `request body`, with content type
   `application/json`. Mixing of parameters between both the
   `query string` and `request body` is allowed.
 * Parameters may be sent in any order.
@@ -33,7 +32,7 @@
 * The `/api/v1/about` `rateLimits` array contains objects related to the exchange's `Weight` or `Order` rate limits.
 * A HTTP/429 status code will be returned when either rate limit is exceeded.
 * Each route has a `Weight` which determines the number of allowed requests per defined time frame for each endpoint.
-* When a HTTP/429 is received, it is your obligation as an API user to control requests rate and not spam the API endpoint.
+* When a HTTP/429 is received, it's your obligation as an API user to control requests rate and not spam the API endpoint.
 * **Repeatedly violating rate limits and/or failing to back off after receiving HTTP/429 responses will result in an automated IP ban (HTTP/418 status).**
 * IP ban durations are scaled according to the frequency of spamming requests - from **2 minutes** to 3 **days**.
 
