@@ -587,7 +587,8 @@ Name | Type | Mandatory | Description
 symbol | STRING | YES |
 start | long | NO |
 end | long | NO |
-limit | int | NO | Default 100, max 250
+page | int | NO | Default 1|
+perPage | int | NO | Default 20, max 200|
 
 **Response:**
 ```javascript
