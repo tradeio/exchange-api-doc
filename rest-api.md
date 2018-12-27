@@ -1,17 +1,16 @@
 # Public Rest API for Trade.io (2018-12-26)
 # General API Information
 * The base endpoint is: **https://api.exchange.trade.io**, 
-* There is a Swagger on the base endpoint. You can open it in browser, see available endpoints, execute some API calls
+* There is a Swagger on the base endpoint. You can open it in a browser, view available endpoints, execute some API calls,
  and so on.
-* All endpoints return either a JSON object or array.
-* Data is returned in **ascending** order. Oldest first, newest last.
+* All endpoints return either a JSON object or an array.
+* Data is returned in **ascending** order. i.e. oldest first, newest last.
 * All time and timestamp related fields are in milliseconds.
-* HTTP `4XX` return codes are used for for malformed requests;
-  the issue is on the sender's side.
+* HTTP `4XX` return codes are used for for malformed requests, the issue is on the sender's side.
 * HTTP `429` status code is used when breaking a request rate limit.
-* HTTP `418` status code is used when an IP address has been auto-banned for keeping sending requests after receiving `429` codes.
+* HTTP `418` status code is used when an IP address has been auto-banned for continuing to send requests after receiving `429` codes.
 * HTTP `5XX` status codes are used for internal errors - the issue is on Trade.io's side.
-  It is important to **NOT** treat this as a failure operation; the execution status is
+  It's important to **NOT** treat this as a failure operation; the execution status is
   **UNKNOWN** and could have been succeeded.
 * Any endpoint can return an ERROR; the error payload is as follows:
 ```javascript
@@ -19,29 +18,29 @@
     "error":"Invalid value symbol: 'btc_us'"
 }
 ```
-* When endpoint's response is success, the code is 0 and no message present. 
-* Specific error codes and messages defined in another document.
+* When and endpoint's response is success, the code is 0 and no message present. 
+* Specific error codes and messages are defined in another document.
 * For `GET` endpoints, parameters must be sent as a `query string`.
 * For `POST`, `PUT`, and `DELETE` endpoints, the parameters may be sent as a
   `query string` or in the `request body` with content type
   `application/json`. Mixing of parameters between both the
   `query string` and `request body` is allowed.
 * Parameters may be sent in any order.
-* If a parameter sent in both `query string` and `request body`, the
+* If a parameter is sent in both a `query string` and in the `request body`, the
   `query string` parameter will be used.
 
 # Limits
 * The `/api/v1/about` `rateLimits` array contains objects related to the exchange's `Weight` or `Order` rate limits.
-* A HTTP/429 status code will be returned when either rate limit is violated.
+* A HTTP/429 status code will be returned when either rate limit is exceeded.
 * Each route has a `Weight` which determines the number of allowed requests per defined time frame for each endpoint.
 * When a HTTP/429 is received, it is your obligation as an API user to control requests rate and not spam the API endpoint.
 * **Repeatedly violating rate limits and/or failing to back off after receiving HTTP/429 responses will result in an automated IP ban (HTTP/418 status).**
 * IP ban durations are scaled according to the frequency of spamming requests - from **2 minutes** to 3 **days**.
 
 ## Endpoint Throttling
-The endpoint throttling is being performed according to the weight of the endpoint. Limit type can be either `Weight` or combination of `Weight` and `Order`:
-* `Weight` throttling - for each endpoint the weights of requests are being accumulated. When the sum reaches the threshold, the server responds with HTTP/429 status code.
-* `Weight` or `Order` throttling - for each endpoint the weights and number of orders are being accumulated. When either of sums reaches the threshold, the server responds with HTTP/429 status code.
+Endpoint throttling is performed according to the weight of the endpoint. Limit type can be either `Weight` or combination of `Weight` and `Order`:
+* `Weight` throttling - for each endpoint the total weight of requests are accumulated. When the sum reaches the threshold, the server responds with HTTP/429 status code.
+* `Weight` and `Order` throttling - for each endpoint the weight and number of orders are accumulated. When either of the sums reaches the threshold, the server responds with HTTP/429 status code.
 
 Below is the table with endpoint weights
 
@@ -71,7 +70,7 @@ Below is the table with endpoint weights
 |Order|Day|86000|
 
 # Endpoint Security Type
-* Each endpoint has a security type that determines how should be interacted with it.
+* Each endpoint has a security type that determines how it should be interacted with.
 * API-keys are passed into the REST API via the `X-MBX-APIKEY`
   header.
 * API-keys and secret-keys are **case sensitive**.
@@ -101,7 +100,7 @@ USER_DATA | Endpoint requires sending a valid API-Key and signature.
 <br>See: <b><a href="https://gitlab.com/trade-io/official-api-docs/blob/master/sign_request.md">SIGN</a></b>
 
 # Permissions
-For each method in the Account Endpoints, you need permission. Permissions for keys are set when they are created. Permissions can be of two types: "Read access" and "Trading".
+For each method in the Account endpoint, you need permission. Permissions for keys are set when they are created. Permissions can be one of two types: "Read access" or "Trading".
 
 # Public API Endpoints
 ## Terminology
@@ -187,7 +186,7 @@ NONE
 ```
 GET /api/v1/info
 ```
-Current exchange trading rules and symbol information
+Current exchange trading rules and symbol information.
 
 **Weight:**
 1
