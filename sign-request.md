@@ -29,8 +29,7 @@ Convert request parameters to this type of string:<br>
 <b>?start=1544427829699&end=1544600629699&limit=100&ts=1544601074424</b>
 
 Sign the resulting string with the algorithm SHA512
-where key = your private key
-Add resulting signature to Header key "Sign"
+where key = your private key and resulting signature to Header key "Sign"
 
 ```
 POST
@@ -41,8 +40,7 @@ Convert request parameters to JSON format:<br>
 <b>{"Symbol":"btc_usdt","Side":"buy","Type":"limit","Quantity":0.01,"Price":0.01,"ts":"1544601801600"}</b>
 
 Sign the resulting string with the algorithm SHA512
-where key = your private key
-Add resulting signature to Header key "Sign"
+where key = your private key and add resulting signature to Header key "Sign"
 
 
 *  Secret key(The 'SecretKey' distributed by Trade.io when you applied for APIKEY):
