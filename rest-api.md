@@ -5,7 +5,7 @@
 * All endpoints return either a JSON object or an array.
 * Data is returned in **ascending** order. i.e. oldest first, newest last.
 * All time and timestamp related fields are in milliseconds.
-* HTTP `4XX` return codes are used for for malformed requests, the issue is on the sender's side.
+* HTTP `4XX` return codes are used for malformed requests, the issue is on the sender's side.
 * HTTP `429` status code is used when breaking a request rate limit.
 * HTTP `418` status code is used when an IP address has been auto-banned for continuing to send requests after receiving `429` codes.
 * HTTP `5XX` status codes are used for internal errors - the issue is on Trade.io's side.
@@ -17,7 +17,7 @@
     "error":"Invalid value, symbol: 'btc_us'"
 }
 ```
-* When and endpoint's response is a success, the code is 0 and no message is present. 
+* When an endpoint's response is a success, the code is 0 and no message is present. 
 * Specific error codes and messages are defined in another document.
 * For `GET` endpoints, parameters must be sent as a `query string`.
 * For `POST`, `PUT`, and `DELETE` endpoints, the parameters may be sent as a
