@@ -96,7 +96,7 @@ USER_DATA | Endpoint requires sending a valid API-Key and signature.
   Use your `secretKey` as the key and `totalParams` as the value for the HMAC operation.
 * The `signature` should be in uppercase.
 * `totalParams` is a concatenation of `query string` with the `request body`.
-<br>See: <b><a href="https://gitlab.com/trade-io/official-api-docs/blob/master/sign_request.md">SIGN</a></b>
+<br>See: <b><a href="https://github.com/tradeio/exchange-api-doc/blob/master/sign-request.md">SIGN</a></b>
 
 # Permissions
 For each method in the Account endpoint, you need permission. Permissions for keys are set when they are created. Permissions can be one of two types: "Read access" or "Trading".
