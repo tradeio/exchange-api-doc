@@ -8,8 +8,8 @@ Trade.io requires that each HTTPS request formatted for Signature should contain
 * Header "<b>Sign</b>": The calculated value that ensures the signature is valid and has not been tampered with. Should be in UPPERCASE.
 * Header "<b>Key</b>": The 'PublicKey' distributed by Trade.io when you applied for APIKEY.
 
-For examples, please see Bash/Curl client https://gitlab.com/trade-io/official-api-docs/blob/master/api.sh and
-C# client https://gitlab.com/trade-io/csharpclient
+For examples, please see Bash/Curl client https://github.com/tradeio/exchange-api-doc/blob/master/api.sh and
+C# client https://github.com/tradeio/api-csharpclient
 
 
 ## How to Generate a Signature
