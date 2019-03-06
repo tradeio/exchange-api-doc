@@ -43,20 +43,21 @@ Endpoint throttling is performed according to the weight of the endpoint. Limit 
 
 Below is the table with endpoint weights
 
-|**Endpoint**|**Limit Type**|**Weight**|**Remarks**|
-|---|---|---|---|
-|```GET /api/v1/info```|`Weight`|5|
-|```GET /api/v1/pairs```|`Weight`|1|
-|```GET /api/v1/depth```|`Weight`|1 + (`limit` / 20)|`limit` is a parameter of of endpoint's GET request| 
-|```GET /api/v1/trades```|`Weight`|1 + (`limit` / 20)|`limit` is a parameter of of endpoint's GET request|
-|```GET /api/v1/klines```|`Weight`|1 + (`limit` / 20)|`limit` is a parameter of of endpoint's GET request|
-|```GET /api/v1/ticker```|`Weight`|1|
-|```GET /api/v1/tickers```|`Weight`|20|
-|```POST /api/v1/order```|`Weight` or `Order`|1|
-|```DELETE /api/v1/order```|`Weight` or `Order`|1|
-|```GET /api/v1/openOrders```|`Weight` or `Order`|1|
-|```GET /api/v1/closedOrders```|`Weight` or `Order`|5|
-|```GET /api/v1/account```|`Weight` or `Order`|1|
+|**Endpoint**|**Weight Coefficient**|**Order Coefficient**|**Remarks**|
+|---|---|---|---
+|```GET /api/v1/info```|5|
+|```GET /api/v1/pairs```|1|
+|```GET /api/v1/depth```|1 + (`limit` / 20)| |`limit` is a parameter of of endpoint's GET request| 
+|```GET /api/v1/trades```|1 + (`limit` / 20)| |`limit` is a parameter of of endpoint's GET request|
+|```GET /api/v1/klines```|1 + (`limit` / 20)| |`limit` is a parameter of of endpoint's GET request|
+|```GET /api/v1/ticker```|1|
+|```GET /api/v1/tickers```|20|
+|```POST /api/v1/order```|1|1|
+|```DELETE /api/v1/order```|1|1|
+|```DELETE /api/v1/orders```|10|5|
+|```GET /api/v1/openOrders```|1|1|
+|```GET /api/v1/closedOrders```|5|1|
+|```GET /api/v1/account```|1|1|
  
  ### Total limits
  |**Limit Type**|**Time period**|**Limit**|
@@ -166,8 +167,8 @@ GET /api/v1/time
 ```
 Test connectivity to the Rest API and get the current server time.
 
-**Weight:**
-1
+**Throttling:**
+Weight 1
 
 **Parameters:**
 NONE
@@ -187,8 +188,8 @@ GET /api/v1/info
 ```
 Current exchange trading rules and symbol information.
 
-**Weight:**
-1
+**Throttling:**
+Weight 1 
 
 **Parameters:**
 NONE
@@ -226,8 +227,8 @@ NONE
 GET /api/v1/depth/{symbol}
 ```
 
-**Weight:**
-Adjusted based on the limit: 1 + (`limit` / 20) 
+**Throttling:**
+Weight adjusted based on the limit: 1 + (`limit` / 20) 
 
 **Parameters:**
 
@@ -276,8 +277,8 @@ GET /api/v1/trades/{symbol}
 ```
 Get recent trades (up to last 100).
 
-**Weight:**
-Adjusted based on the limit: 1 + (`limit` / 20)
+**Throttling:**
+Weight adjusted based on the limit: 1 + (`limit` / 20)
 
 **Parameters:**
 
@@ -321,9 +322,8 @@ Kline/candlestick bars for a symbol.
 
 Klines are uniquely identified by their open time.
 
-**Weight:**
-
-Adjusted based on the limit: 1 + (`limit` / 20)
+**Throttling:**
+Weight adjusted based on the limit: 1 + (`limit` / 20)
 
 **Parameters:**
 
@@ -364,8 +364,8 @@ GET api/v1/ticker/{symbol}
 ```
 Best price/qty on the order book for a symbol or symbols.
 
-**Weight:**
-1
+**Throttling:**
+Weight 1
 
 **Parameters:**
 
@@ -400,8 +400,8 @@ GET api/v1/tickers
 ```
 Best price/qty on the order book for a symbol or symbols.
 
-**Weight:**
-20
+**Throttling:**
+Weight 20
 
 **Parameters:**
 
@@ -451,8 +451,8 @@ POST /api/v1/order  (HMAC SHA512)
 ```
 Send in a new order.
 
-**Weight:**
-1
+**Throttling:**
+Weight 1, Order 1
 
 **Permission:**
 Trading
@@ -505,8 +505,8 @@ DELETE /api/v1/order  (HMAC SHA512)
 ```
 Cancel an active order.
 
-**Weight:**
-1
+**Throttling:**
+Weight 1, Order 1
 
 **Permission:**
 Trading
@@ -515,7 +515,7 @@ Trading
 
 Name | Type | Mandatory | Description
 ------------ | ------------ | ------------ | ------------
-orderId | LONG | YEST |
+orderId | LONG | YES |
 
 **Response:**
 ```javascript
@@ -527,14 +527,52 @@ orderId | LONG | YEST |
 
 
 
+### Cancel All Orders (TRADE)
+```
+DELETE /api/v1/orders  (HMAC SHA512)
+```
+Cancel all active orders or all orders for specified symbol.
+
+**Throttling:**
+Weight 10, Order 5
+
+**Permission:**
+Trading
+
+**Parameters:**
+
+Name | Type | Mandatory | Description
+------------ | ------------ | ------------ | ------------
+symbol | STRING | NO |
+
+**Response:**
+```javascript
+{
+  "code": 0,
+  "timestamp": 1551861300767,
+  "orders": [
+    {
+      "orderId": "-72057593994910335",
+      "status": "Cancelled"
+    },
+    {
+      "orderId": "-72057593994910334",
+      "status": "Cancelled"
+    }
+  ]
+}
+```
+
+
+
 ### Current Open Orders (USER_DATA)
 ```
 GET /api/v1/openOrders/{symbol}  (HMAC SHA512)
 ```
 Get all open orders on a symbol. 
 
-**Weight:**
-1 
+**Throttling:**
+Weight 1, Order 1 
 
 **Permission:**
 Read access
@@ -582,8 +620,8 @@ GET /api/v1/closedOrders/{symbol}  (HMAC SHA512)
 ```
 Get all closed orders on a symbol. 
 
-**Weight:**
-5
+**Throttling:**
+Weight 5, Order 1
 
 **Permission:**
 Read access
@@ -665,8 +703,8 @@ GET /api/v1/account (HMAC SHA512)
 ```
 Get current account information.
 
-**Weight:**
-5
+**Throttling:**
+Weight 1, Order 1
 
 **Permission:**
 Read access
